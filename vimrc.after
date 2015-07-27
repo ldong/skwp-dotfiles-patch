@@ -1,8 +1,8 @@
-" font
-set guifont=Menlo:h15
+" My default font
+" set guifont=Menlo:h15
 
 " clear splash screen
-set shortmess+=I
+" set shortmess=filnxtToO
 
 " spell check
 set spell
