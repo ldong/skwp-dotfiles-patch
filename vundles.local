@@ -1,0 +1,34 @@
+" Unite, CtrlP
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+
+" Tagbar
+Plugin 'majutsushi/tagbar'
+
+" remove trailing whitespace by :FixWhitespace
+Plugin 'bronson/vim-trailing-whitespace'
+
+" Pairs
+Plugin 'jiangmiao/auto-pairs'
+
+" eol
+Plugin 'vim-scripts/PreserveNoEOL'
+
+" Zen coding
+Plugin 'mattn/emmet-vim'
+
+" CSS coloring
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'guns/xterm-color-table.vim'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" select regions, Press + to expand the visual selection and _ to shrink it.
+Plugin 'terryma/vim-expand-region'
+
+" ldong
+Plugin 'ldong/vim_bclose'
+Plugin 'ldong/vim_autohighlight'
+Plugin 'ldong/vim_copy_paste'
+Plugin 'ldong/vim-listify'

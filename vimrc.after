@@ -1,0 +1,295 @@
+"font
+" set guifont=Menlo:h15
+
+" spell check
+set spell
+set spelllang=en_us
+
+" Output ErrorMsg
+set report=0
+
+" config backup directory
+set backup
+set backupdir=~/.vimswap
+set backupskip=~/.vimswap/*
+set directory=~/.vimswap
+set writebackup
+
+" config swap file
+set swapfile
+set dir=~/.vimswap
+
+filetype plugin on
+filetype indent on
+
+" update vim on the fly
+nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>V :tabedit $MYVIMRC<CR>
+
+autocmd! bufwritepost _vimrc source % " vimrc文件修改之后自动加载。 windows。
+autocmd! bufwritepost .vimrc source % " vimrc文件修改之后自动加载。 linux。
+
+" no ex mode
+nnoremap Q <nop>
+
+" remap vim
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
+" Q map to q, to quit vim
+command! -bar -bang Q quit<bang>
+
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+
+" cancel highlight search
+noremap <silent><leader>/ :nohls<CR>
+
+vnoremap < <gv
+vnoremap > >gv
+
+" resize
+nnoremap <leader><left> :vertical resize -5<cr>
+nnoremap <leader><down> :resize +5<cr>
+nnoremap <leader><up> :resize -5<cr>
+nnoremap <leader><right> :vertical resize +5<cr>
+
+" Make <leader>' switch between ' and "
+nnoremap <leader>' ""yls<c-r>={'"': "'", "'": '"'}[@"]<cr><esc>
+
+" map <silent> <leader>y :<C-u>silent '<,'>w !pbcopy<CR>
+
+" avoid and recover from accidental Ctrl-U
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
+inoremap <silent> <C-W> <C-\><C-O>db
+inoremap <silent> <C-U> <C-\><C-O>d0
+inoremap <silent> <C-Y> <C-R>"
+
+" ==============================================================================
+"                                   Mappings
+" ==============================================================================
+" Use single quote as additional range key
+noremap ' `
+
+" Rerun previous :command
+noremap \' @:
+
+" Underline a line with hyphens (<h2> in Markdown documents)
+noremap \- yypVr-
+
+" Underline a line with equals (<h1> in Markdown documents)
+noremap \= yypVr=
+
+" Remove white space turds from the ends of lines
+noremap \W :FixWhitespace<cr>
+
+" Delete ALL THE BUFFERS!
+noremap \bd :1,999bd<cr>:NERDTree<cr>:NERDTree<cr>
+
+" cd current window to parent directory of file
+noremap \cd :lcd %:h<cr>:pwd<cr>
+
+" Copy path of current file to clipboard
+noremap \cf :let @+ = expand("%")<cr>
+
+" Copy full path of current file to clipboard
+noremap \cp :let @+ = expand("%:p")<cr>
+
+" Generate ctags and cscope
+" "ctags -R
+" "cscope -Rbq
+noremap \ct :!ctags -R .<cr><cr>
+
+" Sort selection
+noremap \s :sort<cr>
+
+" selec the whole line
+noremap \v ^v$
+
+" selec the whole line without leading space
+noremap \vv 0v$
+
+" Put contents of parentheses on their own newline and reindent (must position
+" cursor inside parentheses in normal mode first).
+nmap \( ci(<cr><esc>Pa<cr><esc>Vkk=
+
+" Break a comma-delimited list onto new lines
+vmap \, :s/,/,\r/g<cr>)
+
+" copy filename and filepath
+nmap <leader>cn :let @*=expand("%")<CR>
+nmap <leader>cp :let @*=expand("%:p")<CR>
+
+" Error List
+noremap <leader>ln :lnext<cr>
+noremap <leader>lp :lprev<cr>
+
+" redent
+map <leader>= :delmarks z<CR>mzgg=G`zmzk<CR>
+
+" reverse lines
+" :g/^/m0
+" :100,150g/^/m99
+" :%!tac
+" :100,150!tac
+
+" Reverse selection
+" \rh: mirror image the lines (reverse horizontally)
+vnoremap ;rh c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+" \rv: reverse the order of lines (reverse vertically)
+nmap ;rv :set lz<CR>o<Esc>mz'aO<Esc>ma:'a+1,'z-1g/^/m 'a<CR>'addma'zdd:set nolz<CR>
+
+" replace current word select
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
+" pretty print json
+nnoremap <leader>J :%!python -m json.tool<CR>
+
+
+
+" set highlight color after 80 regardless of the version of VIM
+if exists('+colorcolumn')
+    " let &colorcolumn="80,".join(range(120,999),",")
+    let &colorcolumn="80"
+    highlight ColorColumn ctermbg=9 guibg=#df0000
+else
+    " fallback for Vim < v7.3
+    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
+
+" ==============================================================================
+"                             Plugins Configuration
+" ==============================================================================
+" ,nt to open nerdTree
+let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+" <leader><leader>r  rename
+let g:NERDTreeWinPos = "left"
+nmap <silent> <leader>nt :NERDTreeToggle<CR>
+
+" ,tb to open tagbar
+nmap <silent> <leader>tb :TagbarToggle<CR>
+" Ctags, check the parent directories for tags, too.
+set tags=./.tags;,./tags
+let g:easytags_dynamic_files = 1
+let g:easytags_file = '~/.vim/tags'
+let g:easytags_updatetime_min=12000
+let g:easytags_async = 1
+
+" ctags
+let g:tagbar_type_javascript = {
+    \ 'ctagsbin' : '/usr/local/bin/jsctags'
+\ }
+
+" redfine emmet shortcut: ,e,
+let g:user_emmet_install_global = 1
+let g:user_emmet_leader_key     = '<leader>e'
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css,eruby,markdown,handlebars,hbs,php EmmetInstall
+
+" Gundo toggle
+nnoremap <leader>h :GundoToggle<CR>
+
+" fix whitespace
+command! F FixWhitespace
+
+" enable always save with eol at the end of file
+let b:PreserveNoEOL = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Unite
+" <C-x> <C-v> open file in horizontal and vertical split
+" <C-t> open file in new tab
+" <esc> exit unite window
+" <C-j> <C-k> Navigation, keep hands on home row
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <Leader>b :Unite buffer<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+let g:unite_source_history_yank_enable = 1
+nnoremap <space>y :Unite history/yank<cr>
+nnoremap <space>s :Unite -quick-match buffer<cr>
+
+let g:SuperTabCrMapping = 0
+let g:unite_enable_start_insert = 1
+let g:unite_split_rule = "botright"
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight = 5
+call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+      \ 'ignore_pattern', join([
+      \ '\.git/',
+      \ ], '\|'))
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  let b:SuperTabDisabled = 1
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <silent><buffer><expr> <C-x> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction
+
+
+" Appropriately close the buffer without closing the window
+cnoremap <expr> bd (getcmdtype() == ':' ? 'Bclose' : 'bd')
+
+
+
+" => Syntastic
+" Update Error List, enable lnext, lprev to go back and forth
+let g:syntastic_always_populate_loc_list = 1
+" :SyntasticInfo
+let g:syntastic_java_javac_config_file_enabled = 1
+" let g:syntastic_python_checkers = ['pylint', 'flake8', 'python']
+let g:syntastic_python_checkers = ['pylint', 'python']
+let g:syntastic_python_pylint_args='--ignore=E501'
+" let g:syntastic_python_pylint_args='--ignore=W0511,C0321'
+" general
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_quiet_warnings = 0
+"let g:syntastic_enable_signs = 1
+"let g:syntastic_enable_highlighting = 0
+"let g:syntastic_python_checker_args='--ignore=E501,E302,E231,E261,E201,W402,W293'
+
+" highlight python
+" let python_highlight_all = 1
+
+" javascript style guide lint checker
+" let g:syntastic_javascript_checkers = ['jsxhint']
+" let g:syntastic_javascript_checkers = ['jsxhint', 'jscs']
+" let g:syntastic_scss_checkers = ['scss_lint']
+
+let g:syntastic_javascript_checkers = []
+let g:syntastic_scss_checkers = []
+
+
+" Appropriately close the buffer without closing the window
+cnoremap <expr> bd (getcmdtype() == ':' ? 'Bclose' : 'bd')
+
+" Java Abbreviation
+abbr psvm public static void main(String[] args){<CR>}<esc>O
+abbr sysout System.out.println("");<esc>2hi
+abbr syserr System.err.println("");<esc>2hi
+abbr fori for (int i = 0; i < ; i++) {<esc>7hi
+abbr tryb try {<CR>} catch (Exception ex) {<CR> ex.printStackTrace();<CR>}<esc>hx3ko
+abbr ctm System.currentTimeMillis()
+
+" insert date in the following format
+iab <expr> dd strftime("%a %b %_d %H:%M:%S %Z %Y")
