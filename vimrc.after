@@ -178,9 +178,13 @@ endif
 " ==============================================================================
 " ,nt to open nerdTree
 let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+" let g:NERDTreeWinPos = "left"
 " <leader><leader>r  rename
-let g:NERDTreeWinPos = "left"
 nmap <silent> <leader>nt :NERDTreeToggle<CR>
+" open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+
 
 " ,tb to open tagbar
 nmap <silent> <leader>tb :TagbarToggle<CR>
@@ -210,6 +214,10 @@ command! F FixWhitespace
 
 " enable always save with eol at the end of file
 let b:PreserveNoEOL = 1
+
+" eregex regex
+let g:eregex_default_enable = 0
+nnoremap <leader>r :call eregex#toggle()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

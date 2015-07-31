@@ -5,17 +5,35 @@ Plugin 'Shougo/unite.vim'
 " Tagbar
 Plugin 'majutsushi/tagbar'
 
+" EOL
+Plugin 'vim-scripts/PreserveNoEOL'
+
 " remove trailing whitespace by :FixWhitespace
 Plugin 'bronson/vim-trailing-whitespace'
 
-" Pairs
-Plugin 'jiangmiao/auto-pairs'
+" UNIX shell commands
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-speeddating'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 
-" eol
-Plugin 'vim-scripts/PreserveNoEOL'
+" GIT
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" \as to activate autonumbering
+"Plugin'vim-scripts/autonumbering-in-vim'
+
+" Vim and Tmux
+Plugin 'sjl/vitality.vim'
 
 " Zen coding
 Plugin 'mattn/emmet-vim'
+
+" JavaScript
+Plugin 'mxw/vim-jsx'
+
+" Pairs
+Plugin 'jiangmiao/auto-pairs'
 
 " CSS coloring
 Plugin 'gorodinskiy/vim-coloresque'
@@ -32,3 +50,5 @@ Plugin 'ldong/vim_bclose'
 Plugin 'ldong/vim_autohighlight'
 Plugin 'ldong/vim_copy_paste'
 Plugin 'ldong/vim-listify'
+
+
