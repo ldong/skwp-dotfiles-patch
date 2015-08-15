@@ -51,6 +51,8 @@ alias gclean='git reset --hard && git clean -dfx'
 alias gitcopy='git clone --depth 1 '
 alias giturl='git remote show origin'
 alias gitroot='git rev-parse --show-toplevel'
+alias gitreset='git rm --cached '
+alias gitrmcache=gitreset
 
 # Rails
 alias railsUP='rails s -b 0.0.0.0'
