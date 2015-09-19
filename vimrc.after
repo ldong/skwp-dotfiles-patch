@@ -80,6 +80,9 @@ inoremap <silent> <C-W> <C-\><C-O>db
 inoremap <silent> <C-U> <C-\><C-O>d0
 inoremap <silent> <C-Y> <C-R>"
 
+" vertical diff
+set diffopt+=vertical
+
 " ==============================================================================
 "                                   Mappings
 " ==============================================================================
@@ -182,8 +185,8 @@ let NERDTreeIgnore=['\~$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 " <leader><leader>r  rename
 nmap <silent> <leader>nt :NERDTreeToggle<CR>
 " open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
 
 
 " ,tb to open tagbar
@@ -218,6 +221,23 @@ let b:PreserveNoEOL = 1
 " eregex regex
 let g:eregex_default_enable = 0
 nnoremap <leader>r :call eregex#toggle()<CR>
+
+
+" Tabularize
+nmap <Leader>a& :Tabularize /&<CR>
+vmap <Leader>a& :Tabularize /&<CR>
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a,, :Tabularize /,\zs<CR>
+vmap <Leader>a,, :Tabularize /,\zs<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -272,6 +292,7 @@ let g:syntastic_java_javac_config_file_enabled = 1
 let g:syntastic_python_checkers = ['pylint', 'python']
 let g:syntastic_python_pylint_args='--ignore=E501'
 " let g:syntastic_python_pylint_args='--ignore=W0511,C0321'
+let g:syntastic_html_tidy_ignore_errors = [ '<template> is not recognized!' ]
 " general
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_quiet_warnings = 0
