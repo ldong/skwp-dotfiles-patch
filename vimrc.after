@@ -107,6 +107,11 @@ noremap \bd :1,999bd<cr>:NERDTree<cr>:NERDTree<cr>
 " cd current window to parent directory of file
 noremap \cd :lcd %:h<cr>:pwd<cr>
 
+" Edit or view files in same directory as current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
+
 " Copy path of current file to clipboard
 noremap \cf :let @+ = expand("%")<cr>
 
@@ -162,7 +167,6 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " pretty print json
 nnoremap <leader>J :%!python -m json.tool<CR>
-
 
 
 " set highlight color after 80 regardless of the version of VIM
@@ -281,7 +285,8 @@ endfunction
 " Appropriately close the buffer without closing the window
 cnoremap <expr> bd (getcmdtype() == ':' ? 'Bclose' : 'bd')
 
-
+" disable polyglot for javascript
+let g:polyglot_disabled = ['javascript']
 
 " => Syntastic
 " Update Error List, enable lnext, lprev to go back and forth

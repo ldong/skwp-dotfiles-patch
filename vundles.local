@@ -50,6 +50,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+Plugin 'chrisgillis/vim-bootstrap3-snippets'
 
 " select regions, Press + to expand the visual selection and _ to shrink it.
 Plugin 'terryma/vim-expand-region'

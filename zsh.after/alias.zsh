@@ -53,6 +53,7 @@ alias giturl='git remote show origin'
 alias gitroot='git rev-parse --show-toplevel'
 alias gitreset='git rm --cached '
 alias gitrmcache=gitreset
+alias gittree='git log --graph --decorate --pretty=oneline --abbrev-commit'
 
 # Rails
 alias railsUP='rails s -b 0.0.0.0'

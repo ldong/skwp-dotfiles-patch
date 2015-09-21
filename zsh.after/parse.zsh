@@ -1,0 +1,5 @@
+export PARSE_APP_ID='9CLsx0s1jJtNHllPGb91vcSvBcIOTL6se1dAKx9X'
+export PARSE_JS_KEY='B5K9jkDhxGmHjowhbsP1VCLmKlgNITgbxoNP84b7'
+export GOOGLE_GEO_KEY='AIzaSyA206m5jLqcmHHE06POxoX2OdRbyGMuACo'
+
+
