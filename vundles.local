@@ -36,6 +36,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'marijnh/tern_for_vim'
 
 " Pairs
 Plugin 'jiangmiao/auto-pairs'
@@ -61,4 +62,6 @@ Plugin 'ldong/vim_autohighlight'
 Plugin 'ldong/vim_copy_paste'
 Plugin 'ldong/vim-listify'
 
+" Autocomplete
+Plugin 'Valloric/YouCompleteMe'
 

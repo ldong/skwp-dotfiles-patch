@@ -37,8 +37,18 @@ findj() {
   find . -iname $1"*";
 }
 
+findk() {
+  find . -iname "*"$1"*";
+}
+
+timedHistory(){
+  perl -lne 'm#: (\d+):\d+;(.+)# && printf "%s :: %s\n",scalar localtime $1,$2' $HISTFILE
+}
 
 # json pretty print
 alias json="python -mjson.tool"
 
 
+phone (){
+  open "tel://+1""$1"
+}

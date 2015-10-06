@@ -79,13 +79,24 @@ else
   alias ls='ls -F --color=auto'
 fi
 
+vim_or_exec ()
+{
+    interps=($(whence -a "$1"))
+    if [[ -z $interps[2] ]]; then
+        vim "$1"
+    else
+        "$interps[2]" "${@:2}"
+    fi
+}
+
+
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
 alias -s html=vi  # open files in vim
 alias -s rb=vi
 alias -s py=vi
-alias -s js=vi
+alias -s js=vim_or_exec
 alias -s c=vi
 alias -s java=vi
 alias -s txt=vi
