@@ -63,5 +63,5 @@ Plugin 'ldong/vim_copy_paste'
 Plugin 'ldong/vim-listify'
 
 " Autocomplete
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 

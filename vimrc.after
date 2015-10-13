@@ -168,6 +168,8 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " pretty print json
 nnoremap <leader>J :%!python -m json.tool<CR>
 
+" tidy html
+nnoremap <leader>T :%!tidy -qicbn -asxhtml<CR>
 
 " set highlight color after 80 regardless of the version of VIM
 if exists('+colorcolumn')

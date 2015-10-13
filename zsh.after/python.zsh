@@ -35,5 +35,4 @@ export PYTHONPATH=$PYTHONPATH:$(which python)
 # export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.4/site-packages
 # export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages
 # export PYTHONSTARTUP=~/.pythonrc
-
 export PYTHONPATH=$PYTHONPATH:/Users/ldong/.local/lib/python2.7/site-packages/
