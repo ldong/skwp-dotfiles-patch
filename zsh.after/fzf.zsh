@@ -40,7 +40,7 @@ fs() {
   ag --nobreak --nonumbers --noheading . | fzf
 }
 
-
+# https://github.com/junegunn/fzf/issues/159
 fag() {
   [ $# -eq 0  ] && return
   local out cols filepath
