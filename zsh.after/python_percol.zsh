@@ -9,37 +9,37 @@ alias kill_process="ps aux | percol | awk '{ print $2 }' | xargs kill"
 
 # Interactive pgrep / pkill
 function ppgrep() {
-    if [[ $1 == "" ]]; then
-        PERCOL=percol
-    else
-        PERCOL="percol --query $1"
-    fi
-    ps aux | eval $PERCOL | awk '{ print $2 }'
+if [[ $1 == "" ]]; then
+  PERCOL=percol
+else
+  PERCOL="percol --query $1"
+fi
+ps aux | eval $PERCOL | awk '{ print $2 }'
 }
 
 function ppkill() {
-    if [[ $1 =~ "^-" ]]; then
-        QUERY=""            # options only
-    else
-        QUERY=$1            # with a query
-        [[ $# > 0 ]] && shift
-    fi
-    ppgrep $QUERY | xargs kill $*
+if [[ $1 =~ "^-" ]]; then
+  QUERY=""            # options only
+else
+  QUERY=$1            # with a query
+  [[ $# > 0 ]] && shift
+fi
+ppgrep $QUERY | xargs kill $*
 }
 # zsh history search
 function exists { which $1 &> /dev/null }
 
 if exists percol; then
-    function percol_select_history() {
-        local tac
-        exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-        BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
-        CURSOR=$#BUFFER         # move cursor
-        zle -R -c               # refresh
-    }
+  function percol_select_history() {
+  local tac
+  exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
+  BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
+  CURSOR=$#BUFFER         # move cursor
+  zle -R -c               # refresh
+}
 
-    zle -N percol_select_history
-    bindkey '^R' percol_select_history
+zle -N percol_select_history
+bindkey '^R' percol_select_history
 fi
 
 
@@ -73,6 +73,7 @@ bindkey " " magic-space
 ctrlp() {
   </dev/tty vim -c 'Unite file_rec/async'
 }
+
 zle -N ctrlp
 bindkey "^p" ctrlp
 
@@ -98,8 +99,8 @@ bindkey '^e' edit-command-line
 #
 # Reset mode-marker and prompt whenever the keymap changes
 function zle-line-init zle-keymap-select {
-  vi_mode="$(vi_mode_indicator)"
-  zle reset-prompt
+vi_mode="$(vi_mode_indicator)"
+zle reset-prompt
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
@@ -121,15 +122,15 @@ zle -N zle-keymap-select
 # zsh parameter to determine if completion is running, but as
 # far as I'm aware that isn't possible.
 function interruptible-expand-or-complete {
-    COMPLETION_ACTIVE=1
+COMPLETION_ACTIVE=1
 
-    # Bonus feature: automatically interrupt completion
-    # after a three second timeout.
-    # ( sleep 3; kill -INT $$ ) &!
+# Bonus feature: automatically interrupt completion
+# after a three second timeout.
+# ( sleep 3; kill -INT $$ ) &!
 
-    zle expand-or-complete
+zle expand-or-complete
 
-    COMPLETION_ACTIVE=0
+COMPLETION_ACTIVE=0
 }
 
 # Bind our completer widget to tab.
@@ -138,18 +139,16 @@ bindkey '^I' interruptible-expand-or-complete
 
 # Interrupt only if completion is active.
 function TRAPINT {
-    if [[ $COMPLETION_ACTIVE == 1 ]]; then
-        COMPLETION_ACTIVE=0
-        zle -M "Completion canceled."
+if [[ $COMPLETION_ACTIVE == 1 ]]; then
+  COMPLETION_ACTIVE=0
+  zle -M "Completion canceled."
 
-        # Returning non-zero tells zsh to handle SIGINT,
-        # which will interrupt the completion function.
-        return 1
-    else
-        # Returning zero tells zsh that we handled SIGINT;
-        # don't interrupt whatever is currently running.
-        return 0
-    fi
+  # Returning non-zero tells zsh to handle SIGINT,
+  # which will interrupt the completion function.
+  return 1
+else
+  # Returning zero tells zsh that we handled SIGINT;
+  # don't interrupt whatever is currently running.
+  return 0
+fi
 }
-
-
