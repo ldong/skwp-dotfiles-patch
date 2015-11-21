@@ -65,3 +65,5 @@ Plugin 'ldong/vim-listify'
 " Autocomplete
 " Plugin 'Valloric/YouCompleteMe'
 
+" version control: git svn hg
+Plugin 'juneedahamed/vc.vim'

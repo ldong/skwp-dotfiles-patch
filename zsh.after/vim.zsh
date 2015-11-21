@@ -15,3 +15,7 @@ export EDITOR="$VISUAL"
 # else
 #   export EDITOR='mvim'
 # fi
+
+function vundleUpdate (){
+  vim +PluginInstall +qall
+}
