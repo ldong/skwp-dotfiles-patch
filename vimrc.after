@@ -36,6 +36,7 @@ autocmd! bufwritepost .vimrc source % " vimrc文件修改之后自动加载。 l
 nnoremap Q <nop>
 
 " remap vim
+ca wQ wq
 command! WQ wq
 command! Wq wq
 command! W w

@@ -36,3 +36,10 @@ alias iPadOff='defaults write com.apple.PowerChime ChimeOnAllHardware -bool fals
 alias brewup='brew update && brew upgrade && brew cleanup'
 alias bbb=brewup
 
+function mvimp(){
+  mvim --remote-tab-silent $@
+}
+
+callFromiPhone () {
+  open "tel://"$1
+}

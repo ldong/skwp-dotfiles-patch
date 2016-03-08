@@ -97,7 +97,7 @@ alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
 alias -s html=vi  # open files in vim
 alias -s rb=vi
-alias -s py=vi
+alias -s py=vim_or_exec
 alias -s js=vim_or_exec
 alias -s c=vi
 alias -s java=vi
