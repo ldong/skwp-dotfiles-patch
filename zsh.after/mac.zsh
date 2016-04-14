@@ -17,6 +17,7 @@ alias edithosts='sudo vim /private/etc/hosts'
 
 # pdf_join merged.pdf 1.pdf 2.pdf
 function pdf_join {
+  # pdf_join merged.pdf 1.pdf 2.pdf
   join_py="/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py"
   read "output_file?Name of output file > "
   "$join_py" -o $output_file $@ && open $output_file
@@ -40,6 +41,11 @@ function mvimp(){
   mvim --remote-tab-silent $@
 }
 
-callFromiPhone () {
+function callFromiPhone () {
   open "tel://"$1
 }
+
+function fix_curr_DS_Store() {
+  find . -name .DS_Store -print0 | xargs -0 rm
+}
+

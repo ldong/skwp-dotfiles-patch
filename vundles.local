@@ -33,7 +33,7 @@ Plugin 'sjl/vitality.vim'
 Plugin 'mattn/emmet-vim'
 
 " JavaScript
-Plugin 'mxw/vim-jsx'
+"Plugin 'mxw/vim-jsx'
 Plugin 'othree/yajs.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'marijnh/tern_for_vim'
